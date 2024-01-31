@@ -79,11 +79,12 @@ if __name__ == "__main__":
     cfg = setup_cfg(args)
 
     demo = VisualizationDemo(cfg)
-
     if args.input:
         if len(args.input) == 1:
-            args.input = glob.glob(os.path.expanduser(args.input[0]))
-            assert args.input, "The input path(s) was not found"
+            # args.input = glob.glob(os.path.expanduser(args.input[0]))
+            # assert args.input, "The input path(s) was not found"
+            args.input = [os.path.join(args.input[0],img) for img in os.listdir(args.input[0])]
+            print(args.input)
         for path in tqdm.tqdm(args.input, disable=not args.output):
             # use PIL, to be consistent with evaluation
             img = read_image(path, format="BGR")
@@ -98,7 +99,7 @@ if __name__ == "__main__":
                     if "instances" in predictions
                     else "finished",
                     time.time() - start_time,
-                )
+                    )
             )
 
             if args.output:
@@ -109,7 +110,7 @@ if __name__ == "__main__":
                     )
                 else:
                     assert (
-                        len(args.input) == 1
+                            len(args.input) == 1
                     ), "Please specify a directory with args.output"
                     out_filename = args.output
                 visualized_output.save(out_filename)
@@ -118,8 +119,9 @@ if __name__ == "__main__":
                 cv2.imshow(
                     WINDOW_NAME, visualized_output.get_image()[:, :, ::-1]
                 )
-                if cv2.waitKey(0) == 27:
-                    break  # esc to quit
+                # if cv2.waitKey(0) == 27:
+                #     break  # esc to quit
+                cv2.waitKey()
     elif args.webcam:
         assert args.input is None, "Cannot have both --input and --webcam!"
         cam = cv2.VideoCapture(0)

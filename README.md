@@ -1,4 +1,7 @@
 # Few-Shot Object Detection (FsDet)
+
+## 注意模型与配置文件之间的对应关系，否则检测不出
+
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/ucbdrive/few-shot-object-detection.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/ucbdrive/few-shot-object-detection/context:python)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
@@ -121,8 +124,8 @@ We provide a set of benchmark results and pre-trained models available for downl
 ### Inference Demo with Pre-trained Models
 
 1. Pick a model and its config file from
-  [model zoo](fsdet/model_zoo/model_zoo.py),
-  for example, `COCO-detection/faster_rcnn_R_101_FPN_ft_all_1shot.yaml`.
+    [model zoo](fsdet/model_zoo/model_zoo.py),
+    for example, `COCO-detection/faster_rcnn_R_101_FPN_ft_all_1shot.yaml`.
 2. We provide `demo.py` that is able to run builtin standard models. Run it with:
 ```
 python3 -m demo.demo --config-file configs/COCO-detection/faster_rcnn_R_101_FPN_ft_all_1shot.yaml \
